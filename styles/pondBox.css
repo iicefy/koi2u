@@ -1,0 +1,89 @@
+.pondBox {
+  display: table;
+  min-width: 256px;
+  padding: 12px 12px 10px 12px;
+  margin: 0px 5px 10px 5px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.192);
+}
+
+.pondBoxHeader {
+  /* background-color: lightcyan; */
+  display: block;
+  flex-direction: column;
+}
+.pondText {
+  font-size: 24px;
+}
+.farmText,
+.fishText {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.iotFactorBox {
+  display: flex;
+  margin: 10px 0 0 0;
+  /* padding: 0px 12px 0px 12px; */
+  height: 90px;
+  border-radius: 8px;
+  background-color: #0172fc;
+}
+.factorName {
+  display: flex;
+  /* overflow: hidden; */
+  width: 55%;
+  /* background-color: mediumaquamarine; */
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #fff;
+}
+.factorValue {
+  display: flex;
+  width: 45%;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #444;
+}
+.factorMax {
+  padding-left: 10px;
+  display: flex;
+  height: 30%;
+  /* background-color: mediumaquamarine; */
+  font-size: 14px;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: center;
+}
+.factorAvg {
+  padding-left: 10px;
+  display: flex;
+  height: 40%;
+  /* background-color: mediumorchid; */
+  font-size: 24px;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: center;
+}
+.factorMin {
+  padding-left: 10px;
+  display: flex;
+  height: 30%;
+  /* background-color: mediumvioletred; */
+  font-size: 14px;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: center;
+}
+.factorUnit {
+  padding-left: 10px;
+  display: flex;
+  height: 65%;
+  /* background-color: mediumvioletred; */
+  font-size: 12px;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: flex-end;
+}

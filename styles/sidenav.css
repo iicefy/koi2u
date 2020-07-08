@@ -1,0 +1,315 @@
+.sidenav {
+  display: flex;
+  flex: 1;
+  width: 240px;
+  height: 100vh;
+  flex-direction: column;
+
+  padding: 0 10px 0 0;
+  background-color: #fff;
+  /* position: fixed; */
+  z-index: 1;
+  /* overflow: auto; */
+}
+.sideContainer:hover .sideBar {
+  width: 300px;
+  padding: 0 0 0 20px;
+
+  /* overflow: scroll; */
+  /* display: block; */
+}
+
+.logo {
+  display: flex;
+  margin: 20px 0 0 0;
+  /* background-color: lightgreen; */
+}
+.logoText {
+  font-size: 40px;
+  margin-left: 10px;
+}
+
+.sidemenu {
+  /* background-color: lightgrey; */
+  height: 300px;
+  width: 100%;
+  /* height: 200px; */
+  margin-top: 20px;
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  flex-direction: column;
+  /* overflow-y: scroll; */
+  /* overflow-x: hidden; */
+
+  /* background-color: lawngreen; */
+}
+.sideUser {
+  /* margin-top: 500px; */
+  display: block;
+  height: 140px;
+}
+
+.sideContainer {
+  display: flex;
+  height: 100vh;
+  background-color: lightsalmon;
+}
+
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  width: 0px;
+  padding: 0 0 0 0px;
+  background-color: #0172fc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  /* overflow: hidden; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* position: absolute; */
+  /* background-color: lightskyblue; */
+}
+
+.farmBox {
+  display: flex;
+  justify-content: space-between;
+  width: 260px;
+  height: 80px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 0 0 10px 0;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.192);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  padding: 10px 10px 10px 10px;
+}
+.farmBox:hover {
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.192);
+}
+
+.farmName {
+  font-size: 24px;
+}
+.farmPond {
+  font-size: 14px;
+}
+.farmHead {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  /* background-color: blueviolet; */
+}
+.farmHead-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* background-color: blueviolet; */
+}
+.farmBtn {
+  /* background-color: burlywood; */
+  /* flex: 1; */
+  /* width: 80px; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.factorBtn {
+  /* background-color: burlywood; */
+  /* flex: 1; */
+  /* width: 80px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.factorBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 260px;
+  height: 200px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 0 0 10px 0;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.192);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  padding: 10px 10px 10px 10px;
+}
+.factorBox:hover {
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.192);
+}
+
+.dropDownBox {
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: burlywood; */
+}
+
+.dropDown {
+  display: flex;
+  padding: 10px 20px 10px 20px;
+  /* border-style: solid; */
+  /* border-width: 1px; */
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: context-menu;
+  background-color: rgb(223, 223, 223);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  white-space: nowrap;
+}
+.dropDown:hover {
+  background-color: #d1d1d1;
+  /* border-color: #d1d1d1; */
+}
+.dropDownContainer:hover .dropdownContent {
+  display: block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  /* width: 70; */
+  /* height: 200; */
+  background-color: #fff;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.192);
+  border-radius: 8px;
+  /* border-style: solid; */
+  /* border-width: 1px; */
+}
+
+.dropdownList {
+  display: block;
+  padding: 10px 20px 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.dropdownList:hover {
+  background-color: #eaeaea;
+}
+.inputFactor {
+  width: 150px;
+  padding: 8px 10px;
+  /* margin-bottom: 10px; */
+  box-sizing: border-box;
+  border: 2px solid #000;
+  -webkit-transition: 0.8s;
+  transition: 0.8s;
+  outline: none;
+  font-size: 24px;
+  border-radius: 8px;
+}
+.inputFactor:focus {
+  border: 2px solid #0172fc;
+  background-color: #e7f1ff;
+}
+.filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 10px 0px 40px;
+}
+
+.createBookingContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* width: 260px; */
+  height: 80px;
+  border-radius: 8px;
+  background-color: #0172fc;
+  margin: 0 0 10px 0;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.192);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border: 1px solid #fff;
+  /* padding: 20px 12px 20px 12px; */
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+}
+.createBookingContainer:hover {
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.192);
+  font-size: 20px;
+}
+.modalContainer {
+  display: block;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.212);
+  width: 0px;
+  height: 100%;
+  left: 270px;
+  background-color: #0172fc;
+  -webkit-transition: 0.4s;
+  overflow: hidden;
+}
+.sideContainer:hover .modalContainer {
+  display: block;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.212);
+  width: 320px;
+  height: 100%;
+  left: 270px;
+}
+
+.modalBox {
+  display: flex;
+  /* position: absolute; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  /* background-color: blueviolet; */
+}
+.modal {
+  display: flex;
+  padding: 10px 10px 10px 10px;
+  width: 180px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  flex-direction: column;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.192);
+}
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 160px;
+  white-space: nowrap;
+}
+.modalBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* width: 260px; */
+  height: 60px;
+  border-radius: 8px;
+  background-color: #0172fc;
+  margin: 0 0 0px 0;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.192);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border: 1px solid #fff;
+  /* padding: 20px 12px 20px 12px; */
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  white-space: nowrap;
+}
+.modalBtn:hover {
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.192);
+  /* font-size: 20px; */
+}
