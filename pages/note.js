@@ -6,11 +6,13 @@ import NoteBox2 from "../components/noteBox2";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Loader from "react-spinners/PulseLoader";
 
 export default function Note() {
   const token = useSelector((state) => state.user.token);
   const farmData = useSelector((state) => state.user.farm);
   const factorList = useSelector((state) => state.user.factorList);
+  const isFactorLoaded = useSelector((state) => state.user.isFactorLoaded);
   const [isLoaded, setisLoaded] = useState(true);
   const [noteByPond, setNoteByPond] = useState();
   const dispatch = useDispatch();
@@ -186,7 +188,19 @@ export default function Note() {
                   <div className="dropDownContainer">
                     <div className="dropDown">{selectFactorText}</div>
                     <div className="dropdownContent">
-                      <RenderFactorDropDown list={factorList} />
+                      {isFactorLoaded ? (
+                        <RenderFactorDropDown list={factorList} />
+                      ) : (
+                        <div className="loadingBoxWithMarginTop">
+                          <Loader
+                            size={8}
+                            margin={2}
+                            // width={10}
+                            color={"#fff"}
+                            loading={true}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -208,9 +222,39 @@ export default function Note() {
             </div>
             <div className="noteBoxContainer">
               {isfilter ? (
-                <div>{isLoaded ? <NoteBox2 /> : <div>Loading</div>}</div>
+                <div>
+                  filtered
+                  {isLoaded ? (
+                    <NoteBox2 />
+                  ) : (
+                    <div className="loadingBoxWithMarginTop">
+                      <Loader
+                        size={8}
+                        margin={2}
+                        // width={10}
+                        color={"#fff"}
+                        loading={true}
+                      />
+                    </div>
+                  )}
+                </div>
               ) : (
-                <div>{isLoaded ? <NoteBox /> : <div>Loading</div>} </div>
+                <div>
+                  not filter
+                  {isLoaded ? (
+                    <NoteBox />
+                  ) : (
+                    <div className="loadingBoxWithMarginTop">
+                      <Loader
+                        size={8}
+                        margin={2}
+                        // width={10}
+                        color={"#fff"}
+                        loading={true}
+                      />
+                    </div>
+                  )}{" "}
+                </div>
               )}
             </div>
           </div>

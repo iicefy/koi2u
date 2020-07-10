@@ -5,17 +5,20 @@ import Router from "next/router";
 
 import { useDispatch } from "react-redux";
 import axios from "axios";
-// import Dropdown from "react-dropdown";
+import Loader from "react-spinners/PulseLoader";
 
 export default function SideNav2() {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.user.isLogin);
   const FACTOR = "FACTOR";
+  const ISFACTORLOADED_INNOTE = "ISFACTORLOADED_INNOTE";
   const token = useSelector((state) => state.user.token);
   const factorData = useSelector((state) => state.user.factorList);
   const farmData = useSelector((state) => state.user.farm);
+  const isFactorLoaded = useSelector((state) => state.user.isFactorLoaded);
   const [isLoaded, setisLoaded] = useState(false);
   const [selectFarm, setselectFarm] = useState();
+  const [selectFactor, setSelectFactor] = useState(false);
 
   const fetchDataFactor = async () => {
     let url = `http://localhost:8080/api/v1/factor/lists-by-customer`;
@@ -32,6 +35,10 @@ export default function SideNav2() {
       dispatch({
         type: FACTOR,
         factorList: result.data.specielist,
+      });
+      dispatch({
+        type: ISFACTORLOADED_INNOTE,
+        isFactorLoaded: true,
       });
     } catch (err) {
       console.log(err.message);
@@ -184,6 +191,7 @@ export default function SideNav2() {
               console.log(selectPondValue);
               console.log(factorText);
               console.log(list.factor_id);
+              toggle();
             }}
           >
             Add
@@ -231,10 +239,26 @@ export default function SideNav2() {
     );
   };
 
+  const toggleModal = () => {
+    const [isShowing, setIsShowing] = useState(false);
+
+    function toggle() {
+      setIsShowing(!isShowing);
+    }
+    return {
+      isShowing,
+      toggle,
+    };
+  };
+
+  const { isShowing, toggle } = toggleModal();
+
   useEffect(() => {
-    setisLoaded(false);
+    dispatch({
+      type: ISFACTORLOADED_INNOTE,
+      isFactorLoaded: false,
+    });
     fetchDataFactor();
-    setisLoaded(true);
   }, []);
 
   return (
@@ -282,12 +306,35 @@ export default function SideNav2() {
       </div>
 
       <div className="sideBar">
-        <div className="headTextDashboard-white">Your Factor</div>
-        {isLoaded ? (
+        {/* {isShowing ? (
+          <div className="modalContainer">
+            <div className="modalBox">
+              <div className="modal">
+                <div className="modalContent">Booking Created</div>
+                <div
+                  className="modalBtn"
+                  onClick={() => {
+                    toggle();
+                  }}
+                >
+                  OK
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null} */}
+        {/* <div className="headTextDashboard-white">Your Factor</div> */}
+        {/* {isFactorLoaded ? (
           <RenderFactor factorData={factorData} />
         ) : (
-          <div>Loading</div>
-        )}
+          <Loader
+            size={8}
+            margin={2}
+            // width={10}
+            color={"#fff"}
+            loading={true}
+          />
+        )} */}
       </div>
     </div>
   );

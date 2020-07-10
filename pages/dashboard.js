@@ -11,18 +11,19 @@ import FactorData from "../data/PondData";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import useSWR from "swr";
+import Loader from "react-spinners/PulseLoader";
 
 export default function Dashboard() {
   const FARM = "FARM";
   const POND = "POND";
   const FARM_SELECT = "FARM_SELECT";
+  const ISFARMLOADED_INNAVBAR = "ISFARMLOADED_INNAVBAR";
+  const ISPONDLOADED_INDASHBOARD = "ISPONDLOADED_INDASHBOARD";
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
   const pondlist = useSelector((state) => state.user.pond);
   const selectedFarm = useSelector((state) => state.user.selectFarm);
-  const [isLoaded, setisLoaded] = useState();
-  const [text, settext] = useState("Loading");
-  console.log(token);
+  const isPondLoaded = useSelector((state) => state.user.isPondLoaded);
 
   const fetchPondList = async () => {
     let url = `http://localhost:8080/api/v1/customer/dashboard-select`;
@@ -44,6 +45,10 @@ export default function Dashboard() {
       dispatch({
         type: POND,
         PondData: result.data.pond_list,
+      });
+      dispatch({
+        type: ISPONDLOADED_INDASHBOARD,
+        isPondLoaded: true,
       });
     } catch (err) {
       console.log(err.message);
@@ -67,6 +72,10 @@ export default function Dashboard() {
         type: FARM,
         FarmData: result.data.farmlist,
       });
+      dispatch({
+        type: ISFARMLOADED_INNAVBAR,
+        isFarmLoaded: true,
+      });
       // console.log(result.data.farmlist[0].farm_id);
       dispatch({
         type: FARM_SELECT,
@@ -82,12 +91,11 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    settext("Loading");
-    setisLoaded(false);
-    fetchPondList().then(() => {
-      settext("Loaded");
-      setisLoaded(true);
+    dispatch({
+      type: ISPONDLOADED_INDASHBOARD,
+      isPondLoaded: false,
     });
+    fetchPondList();
   }, [selectedFarm]);
 
   const RenderCard = (props) => {
@@ -111,7 +119,19 @@ export default function Dashboard() {
           </div>
           <div className="page2">
             <div className="headTextDashboard">Your Ponds</div>
-            {isLoaded ? <RenderCard ponds={pondlist} /> : <div>Loading</div>}
+            {isPondLoaded ? (
+              <RenderCard ponds={pondlist} />
+            ) : (
+              <div className="loadingBox">
+                <Loader
+                  size={8}
+                  margin={2}
+                  // width={10}
+                  color={"#444"}
+                  loading={true}
+                />
+              </div>
+            )}
           </div>
         </div>
       </main>

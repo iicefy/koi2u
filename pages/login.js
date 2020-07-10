@@ -14,7 +14,7 @@ export default function Login() {
         pathname: "/dashboard",
       });
     } else {
-      console.log("dont have");
+      console.log("dont have token");
     }
 
     return () => {};

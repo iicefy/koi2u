@@ -3,6 +3,7 @@ import Link from "next/link";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import Loader from "react-spinners/PulseLoader";
 
 export default function SideNav3({ description }) {
   const dispatch = useDispatch();
@@ -337,7 +338,7 @@ export default function SideNav3({ description }) {
       </div>
 
       <div className="sideBar">
-        {isShowing ? (
+        {/* {isShowing ? (
           <div className="modalContainer">
             <div className="modalBox">
               <div className="modal">
@@ -353,9 +354,9 @@ export default function SideNav3({ description }) {
               </div>
             </div>
           </div>
-        ) : null}
-        <div className="headTextDashboard-white">Choose Pond</div>
-        <div className="farmHead-row">
+        ) : null} */}
+        {/* <div className="headTextDashboard-white">Choose Pond</div> */}
+        {/* <div className="farmHead-row">
           <div className="row">
             <div className="dropDownBox">
               <div className="dropDownContainer">
@@ -378,20 +379,36 @@ export default function SideNav3({ description }) {
               </div>
             </div>
           </div>
-        </div>
-        <div className="headTextDashboard-white">Farm Service</div>
-        {isLoaded1 ? (
+        </div> */}
+        {/* <div className="headTextDashboard-white">Farm Service</div> */}
+        {/* {isLoaded1 ? (
           <RenderListService1 list={serviceList1} />
         ) : (
-          <div>loading</div>
-        )}
-        <div className="headTextDashboard-white">IoT Service</div>
-        {isLoaded2 ? (
+          <div className="loadingBox">
+            <Loader
+              size={8}
+              margin={2}
+              // width={10}
+              color={"#fff"}
+              loading={true}
+            />
+          </div>
+        )} */}
+        {/* <div className="headTextDashboard-white">IoT Service</div> */}
+        {/* {isLoaded2 ? (
           <RenderListService1 list={serviceList2} />
         ) : (
-          <div>loading</div>
-        )}
-        <div className="row">
+          <div className="loadingBox">
+            <Loader
+              size={8}
+              margin={2}
+              // width={10}
+              color={"#fff"}
+              loading={true}
+            />
+          </div>
+        )} */}
+        {/* <div className="row">
           <div className="headTextDashboard-white">Choosed</div>
           <div className="dropDownBox">
             <div className="dropDownContainer">
@@ -418,9 +435,9 @@ export default function SideNav3({ description }) {
               </div>
             </div>
           </div>
-        </div>
-        {isValue ? <RenderSelectedService list={valueResult} /> : <div></div>}
-        <div className="serviceList">
+        </div> */}
+        {/* {isValue ? <RenderSelectedService list={valueResult} /> : <div></div>} */}
+        {/* <div className="serviceList">
           <div
             className="createBookingContainer"
             onClick={() => {
@@ -432,7 +449,7 @@ export default function SideNav3({ description }) {
           >
             Create Booking
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

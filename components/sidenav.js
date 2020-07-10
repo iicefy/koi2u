@@ -5,6 +5,7 @@ import Router from "next/router";
 import Spinner from "react-bootstrap/Spinner";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import Loader from "react-spinners/PulseLoader";
 
 export default function SideNav() {
   //variable
@@ -14,8 +15,7 @@ export default function SideNav() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const farmData = useSelector((state) => state.user.farm);
   const selectFarm = useSelector((state) => state.user.selectFarm);
-
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isFarmLoaded = useSelector((state) => state.user.isFarmLoaded);
 
   //render function
   const RenderCard = (props) => {
@@ -34,7 +34,6 @@ export default function SideNav() {
         type: FARM_SELECT,
         selectFarm: farm.farm_id,
       });
-      // console.log(farm.farm_id);
     };
 
     return (
@@ -91,12 +90,6 @@ export default function SideNav() {
     );
   };
 
-  useEffect(() => {
-    setIsLoaded(false);
-    // fetchFarmList();
-    setIsLoaded(true);
-  }, []);
-
   return (
     <div className="sideContainer">
       <div className="sidenav">
@@ -118,9 +111,6 @@ export default function SideNav() {
           <Link href="/farmservice">
             <a className="menubtn">Farm Service</a>
           </Link>
-          {/* <Link href="/service">
-            <a className="menubtn">Service</a>
-          </Link> */}
           <a
             className="menubtn"
             href="https://www.koi2u.com/%e0%b8%aa%e0%b8%b4%e0%b8%99%e0%b8%84%e0%b9%89%e0%b8%b2/"
@@ -142,8 +132,20 @@ export default function SideNav() {
       </div>
 
       <div className="sideBar">
-        <div className="headTextDashboard-white">Your Farm</div>
-        {isLoaded ? <RenderCard farmData={farmData} /> : <div>Loading...</div>}
+        {/* <div className="headTextDashboard-white">Your Farm</div> */}
+        {/* {isFarmLoaded ? (
+          <RenderCard farmData={farmData} />
+        ) : (
+          <div className="loadingBoxWithMarginTop">
+            <Loader
+              size={8}
+              margin={2}
+              // width={10}
+              color={"#fff"}
+              loading={true}
+            />
+          </div>
+        )} */}
       </div>
     </div>
   );

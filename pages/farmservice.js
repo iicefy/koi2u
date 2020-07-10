@@ -3,6 +3,8 @@ import Header from "../components/header";
 import SideNav3 from "../components/sidenav3";
 import NoteBox from "../components/noteBox";
 
+import Loader from "react-spinners/PulseLoader";
+
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -130,7 +132,15 @@ export default function Farmservice() {
                     {isLoaded ? (
                       <RenderBookingList list={dataBooking} />
                     ) : (
-                      <div></div>
+                      <div className="loadingBoxWithMarginTop">
+                        <Loader
+                          size={8}
+                          margin={2}
+                          // width={10}
+                          color={"#fff"}
+                          loading={true}
+                        />
+                      </div>
                     )}
                   </div>
                 </div>

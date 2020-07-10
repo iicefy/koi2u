@@ -237,6 +237,7 @@
   cursor: pointer;
   font-size: 16px;
   color: #fff;
+  /* text-decoration: none; */
 }
 .createBookingContainer:hover {
   box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.192);
@@ -251,6 +252,7 @@
   left: 270px;
   background-color: #0172fc;
   -webkit-transition: 0.4s;
+  transition: 0.4s;
   overflow: hidden;
 }
 .sideContainer:hover .modalContainer {

@@ -10,9 +10,11 @@ const initialState = {
   email: "",
   selectFarm: "",
   factorList: {},
-  isPondLoaded: false,
   selectPond: "",
   selectFactor: "",
+  isFarmLoaded: false,
+  isPondLoaded: false,
+  isFactorLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,6 +54,21 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         selectFactor: action.selectFactor,
+      };
+    case actionTypes.ISFARMLOADED_INNAVBAR:
+      return {
+        ...state,
+        isFarmLoaded: action.isFarmLoaded,
+      };
+    case actionTypes.ISPONDLOADED_INDASHBOARD:
+      return {
+        ...state,
+        isPondLoaded: action.isPondLoaded,
+      };
+    case actionTypes.ISFACTORLOADED_INNOTE:
+      return {
+        ...state,
+        isFactorLoaded: action.isFactorLoaded,
       };
 
     default:

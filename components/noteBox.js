@@ -67,11 +67,11 @@ export default function NoteBox() {
       <div className="noteList">
         <div className="noteTextContainer1">
           <div className="noteText1">{data.factor_facterType}</div>
-          <div className="noteText1">6.2 {data.factor_unit}</div>
+          <div className="noteText1">6.2 </div>
         </div>
         <div className="noteTextContainer2">
-          <div className="">Pond 1</div>
-          <div>{createDate}</div>
+          <div className="">{createDate}</div>
+          <div>{data.factor_unit}</div>
         </div>
       </div>
     );
