@@ -100,7 +100,7 @@ export default function SideNav2() {
     const RenderPondDropDown = (props) => {
       const farmData = props.list;
       const listItems = farmData.map((data) => (
-        <DropDownPondContent key={data.fish_pond_id} pond={data} />
+        <DropDownPondContent key={data.fishpond_id} pond={data} />
       ));
 
       return <div className="dropdownContent">{listItems}</div>;
@@ -111,20 +111,21 @@ export default function SideNav2() {
         <div
           className="dropdownList"
           onClick={() => {
-            setselectPondText(pond.fish_pond_name);
-            setselectPondValue(pond.fish_pond_id);
+            setselectPondText(pond.fishpond_name);
+            setselectPondValue(pond.fishpond_id);
+            // console.log(pond.fishpond_id);
           }}
         >
-          {pond.fish_pond_name}
+          {pond.fishpond_name}
         </div>
       );
     };
 
     //fetchDatafarm
     const fetchPondList = async () => {
-      let url = `http://localhost:8080/api/v1/customer/dashboard-select`;
+      let url = `http://localhost:8080/api/v1/fishpond/lists`;
       let Authorization = token;
-      console.log(selectFarmValue);
+      // console.log(selectFarmValue);
       try {
         const result = await axios({
           method: "post",
@@ -136,7 +137,8 @@ export default function SideNav2() {
             farm_id: selectFarmValue,
           },
         });
-        setDataPond(result.data.pond_list);
+        // console.log(result.data.farmlist);
+        setDataPond(result.data.farmlist);
       } catch (err) {
         console.log(err.message);
       }
@@ -306,7 +308,7 @@ export default function SideNav2() {
       </div>
 
       <div className="sideBar">
-        {/* {isShowing ? (
+        {isShowing ? (
           <div className="modalContainer">
             <div className="modalBox">
               <div className="modal">
@@ -322,9 +324,9 @@ export default function SideNav2() {
               </div>
             </div>
           </div>
-        ) : null} */}
-        {/* <div className="headTextDashboard-white">Your Factor</div> */}
-        {/* {isFactorLoaded ? (
+        ) : null}
+        <div className="headTextDashboard-white">Your Factor</div>
+        {isFactorLoaded ? (
           <RenderFactor factorData={factorData} />
         ) : (
           <Loader
@@ -334,7 +336,7 @@ export default function SideNav2() {
             color={"#fff"}
             loading={true}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

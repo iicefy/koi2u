@@ -7,6 +7,7 @@ import Loader from "react-spinners/PulseLoader";
 
 export default function SideNav3({ description }) {
   const dispatch = useDispatch();
+  const SETBOOKING_REFRESH = "SETBOOKING_REFRESH";
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = useSelector((state) => state.user.token);
   const farmData = useSelector((state) => state.user.farm);
@@ -55,7 +56,7 @@ export default function SideNav3({ description }) {
   const RenderPondDropDown = (props) => {
     const farmData = props.list;
     const listItems = farmData.map((data) => (
-      <DropDownPondContent key={data.fish_pond_id} pond={data} />
+      <DropDownPondContent key={data.fishpond_id} pond={data} />
     ));
 
     return <div className="dropdownContent">{listItems}</div>;
@@ -66,20 +67,21 @@ export default function SideNav3({ description }) {
       <div
         className="dropdownList"
         onClick={() => {
-          setselectPondText(pond.fish_pond_name);
-          setselectPondValue(pond.fish_pond_id);
+          setselectPondText(pond.fishpond_name);
+          setselectPondValue(pond.fishpond_id);
+          // console.log(pond.fishpond_id);
         }}
       >
-        {pond.fish_pond_name}
+        {pond.fishpond_name}
       </div>
     );
   };
 
   //fetchDatafarm
   const fetchPondList = async () => {
-    let url = `http://localhost:8080/api/v1/customer/dashboard-select`;
+    let url = `http://localhost:8080/api/v1/fishpond/lists`;
     let Authorization = token;
-    console.log(selectFarmValue);
+    // console.log(selectFarmValue);
     try {
       const result = await axios({
         method: "post",
@@ -91,7 +93,9 @@ export default function SideNav3({ description }) {
           farm_id: selectFarmValue,
         },
       });
-      setDataPond(result.data.pond_list);
+      // console.log(result.data.farmlist);
+      setDataPond(result.data.farmlist);
+      // setDataPond(result.data.pond_list);
     } catch (err) {
       console.log(err.message);
     }
@@ -133,6 +137,40 @@ export default function SideNav3({ description }) {
         },
       });
       setServiceList2(result.data.serviceList);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const fetchDataCreateBooking = async () => {
+    console.log("valueResultID");
+    console.log(valueResultID);
+    console.log("description");
+    console.log(description);
+    console.log("selectPondValue");
+    console.log(selectPondValue);
+    let url = `http://localhost:8080/api/v1/booking/create-by-customer`;
+    let Authorization = token;
+    try {
+      const result = await axios({
+        method: "post",
+        url,
+        headers: {
+          Authorization,
+        },
+        data: {
+          service: valueResultID,
+          description: description,
+          fishpond_id: selectPondValue,
+        },
+      }).then(() => {
+        dispatch({
+          type: SETBOOKING_REFRESH,
+          isBookingRefresh: true,
+        });
+        toggle();
+        console.log(result);
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -314,9 +352,6 @@ export default function SideNav3({ description }) {
           <Link href="/farmservice">
             <a className="menubtn">Farm Service</a>
           </Link>
-          {/* <Link href="/service">
-            <a className="menubtn">Service</a>
-          </Link> */}
           <a
             className="menubtn"
             href="https://www.koi2u.com/%e0%b8%aa%e0%b8%b4%e0%b8%99%e0%b8%84%e0%b9%89%e0%b8%b2/"
@@ -338,7 +373,7 @@ export default function SideNav3({ description }) {
       </div>
 
       <div className="sideBar">
-        {/* {isShowing ? (
+        {isShowing ? (
           <div className="modalContainer">
             <div className="modalBox">
               <div className="modal">
@@ -354,9 +389,9 @@ export default function SideNav3({ description }) {
               </div>
             </div>
           </div>
-        ) : null} */}
-        {/* <div className="headTextDashboard-white">Choose Pond</div> */}
-        {/* <div className="farmHead-row">
+        ) : null}
+        <div className="headTextDashboard-white">Choose Pond</div>
+        <div className="farmHead-row">
           <div className="row">
             <div className="dropDownBox">
               <div className="dropDownContainer">
@@ -379,9 +414,9 @@ export default function SideNav3({ description }) {
               </div>
             </div>
           </div>
-        </div> */}
-        {/* <div className="headTextDashboard-white">Farm Service</div> */}
-        {/* {isLoaded1 ? (
+        </div>
+        <div className="headTextDashboard-white">Farm Service</div>
+        {isLoaded1 ? (
           <RenderListService1 list={serviceList1} />
         ) : (
           <div className="loadingBox">
@@ -393,9 +428,9 @@ export default function SideNav3({ description }) {
               loading={true}
             />
           </div>
-        )} */}
-        {/* <div className="headTextDashboard-white">IoT Service</div> */}
-        {/* {isLoaded2 ? (
+        )}
+        <div className="headTextDashboard-white">IoT Service</div>
+        {isLoaded2 ? (
           <RenderListService1 list={serviceList2} />
         ) : (
           <div className="loadingBox">
@@ -407,8 +442,8 @@ export default function SideNav3({ description }) {
               loading={true}
             />
           </div>
-        )} */}
-        {/* <div className="row">
+        )}
+        <div className="row">
           <div className="headTextDashboard-white">Choosed</div>
           <div className="dropDownBox">
             <div className="dropDownContainer">
@@ -435,21 +470,18 @@ export default function SideNav3({ description }) {
               </div>
             </div>
           </div>
-        </div> */}
-        {/* {isValue ? <RenderSelectedService list={valueResult} /> : <div></div>} */}
-        {/* <div className="serviceList">
+        </div>
+        {isValue ? <RenderSelectedService list={valueResult} /> : <div></div>}
+        <div className="serviceList">
           <div
             className="createBookingContainer"
             onClick={() => {
-              console.log(valueResultID);
-              console.log(description);
-              console.log(selectPondValue);
-              toggle();
+              fetchDataCreateBooking();
             }}
           >
             Create Booking
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

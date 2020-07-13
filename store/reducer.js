@@ -15,6 +15,7 @@ const initialState = {
   isFarmLoaded: false,
   isPondLoaded: false,
   isFactorLoaded: false,
+  isBookingRefresh: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -69,6 +70,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFactorLoaded: action.isFactorLoaded,
+      };
+    case actionTypes.SETBOOKING_REFRESH:
+      console.log(state);
+      return {
+        ...state,
+        isBookingRefresh: action.isBookingRefresh,
       };
 
     default:

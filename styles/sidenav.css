@@ -1,5 +1,6 @@
 .sidenav {
   display: flex;
+  /* position: absolute; */
   flex: 1;
   width: 240px;
   height: 100vh;
@@ -237,7 +238,7 @@
   cursor: pointer;
   font-size: 16px;
   color: #fff;
-  /* text-decoration: none; */
+  text-decoration: none;
 }
 .createBookingContainer:hover {
   box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.192);

@@ -5,16 +5,28 @@ import NoteBox from "../components/noteBox";
 
 import Loader from "react-spinners/PulseLoader";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import useSWR from "swr";
 
 export default function Farmservice() {
+  const dispatch = useDispatch();
+  const SETBOOKING_REFRESH = "SETBOOKING_REFRESH";
   const token = useSelector((state) => state.user.token);
+  const isBookingRefresh = useSelector((state) => state.user.isBookingRefresh);
   const [description, setDescription] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [dataBooking, setDataBooking] = useState();
+
+  const useDidMountEffect = (func, deps) => {
+    const didMount = useRef(false);
+
+    useEffect(() => {
+      if (didMount.current) func();
+      else didMount.current = true;
+    }, deps);
+  };
 
   const fetchDataBooking = async () => {
     let url = `http://localhost:8080/api/v1/booking/list-booking`;
@@ -27,7 +39,12 @@ export default function Farmservice() {
           Authorization,
         },
       });
+      console.log(result.data.list_booking);
       setDataBooking(result.data.list_booking);
+      dispatch({
+        type: SETBOOKING_REFRESH,
+        isBookingRefresh: false,
+      });
       // console.log(result.data);
     } catch (err) {
       console.log(err.message);
@@ -44,6 +61,34 @@ export default function Farmservice() {
   };
 
   const BookingList = ({ data }) => {
+    const fetchDataConfirm = async () => {
+      let url = `http://localhost:8080/api/v1/booking/confirm-booking-by-customer`;
+      let Authorization = token;
+      dispatch({
+        type: SETBOOKING_REFRESH,
+        isBookingRefresh: true,
+      });
+      try {
+        const result = await axios({
+          method: "post",
+          url,
+          headers: {
+            Authorization,
+          },
+          data: {
+            booking_id: data.booking_id,
+          },
+        });
+        dispatch({
+          type: SETBOOKING_REFRESH,
+          isBookingRefresh: false,
+        });
+        console.log(result.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
     return (
       <div className="bookingList">
         <div className="bookingData">
@@ -67,27 +112,25 @@ export default function Farmservice() {
           <div className="text-row">
             <div className="">Description : </div>
           </div>
+          <div className="text-row">
+            <div className="" style={{ marginTop: "10px" }}>
+              {data.booking_description}
+            </div>
+          </div>
         </div>
 
         <div className="confirmBooking">
-          <div className="confirmBookingBtn" onClick={() => {}}>
+          <div
+            className="confirmBookingBtn"
+            onClick={() => {
+              fetchDataConfirm();
+            }}
+          >
             Confirm Booking
           </div>
         </div>
       </div>
     );
-  };
-
-  const testSWR = () => {
-    let url = `http://dummy.restapiexample.com/api/v1/employees`;
-    useSWR([url, term], () =>
-      axios({
-        method: "GET",
-        url,
-        // params: { term },
-      }).then((res) => res.data)
-    );
-    console.log(res.data);
   };
 
   useEffect(() => {
@@ -98,6 +141,19 @@ export default function Farmservice() {
     });
     return () => {};
   }, []);
+
+  useDidMountEffect(() => {
+    if (isBookingRefresh === false) {
+      console.log("isBookingRefresh");
+      console.log(isBookingRefresh);
+    } else {
+      setIsLoaded(false);
+      fetchDataBooking().then(() => {
+        setIsLoaded(true);
+      });
+    }
+    return () => {};
+  }, [isBookingRefresh]);
 
   return (
     <div className="container">

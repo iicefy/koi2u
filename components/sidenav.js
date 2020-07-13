@@ -132,8 +132,8 @@ export default function SideNav() {
       </div>
 
       <div className="sideBar">
-        {/* <div className="headTextDashboard-white">Your Farm</div> */}
-        {/* {isFarmLoaded ? (
+        <div className="headTextDashboard-white">Your Farm</div>
+        {isFarmLoaded ? (
           <RenderCard farmData={farmData} />
         ) : (
           <div className="loadingBoxWithMarginTop">
@@ -145,7 +145,7 @@ export default function SideNav() {
               loading={true}
             />
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

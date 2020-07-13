@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function NoteBox2() {
+  const dispatch = useDispatch();
+  const SELECT_FACTOR = "SELECT_FACTOR";
   const token = useSelector((state) => state.user.token);
   const pondID = useSelector((state) => state.user.selectPond);
   const factorID = useSelector((state) => state.user.selectFactor);
@@ -37,6 +39,10 @@ export default function NoteBox2() {
       });
       setNoteData(result.data.lists_manual);
       console.log(result.data);
+      dispatch({
+        type: SELECT_FACTOR,
+        selectFactor: null,
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -80,9 +86,13 @@ export default function NoteBox2() {
   };
 
   useDidMountEffect(() => {
-    fetchNoteListFromPondID().then(() => {
-      setIsLoaded(true);
-    });
+    if (factorID === null) {
+      console.log("action");
+    } else {
+      fetchNoteListFromPondID().then(() => {
+        setIsLoaded(true);
+      });
+    }
     return () => {};
   }, [factorID]);
 

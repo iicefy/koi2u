@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "react-spinners/PulseLoader";
 
 export default function NoteBox() {
+  const dispatch = useDispatch();
+  const SELECT_PONDID = "SELECT_PONDID";
   const pondID = useSelector((state) => state.user.selectPond);
   const token = useSelector((state) => state.user.token);
 
@@ -35,6 +38,10 @@ export default function NoteBox() {
       });
       setNoteData(result.data.lists_manual);
       // console.log(result.data);
+      dispatch({
+        type: SELECT_PONDID,
+        selectPond: null,
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -78,15 +85,26 @@ export default function NoteBox() {
   };
 
   useDidMountEffect(() => {
-    fetchNoteListFromPondID().then(() => {
-      setIsLoaded(true);
-    });
+    if (pondID === null) {
+      console.log("action");
+    } else {
+      fetchNoteListFromPondID().then(() => {
+        setIsLoaded(true);
+      });
+    }
+
     return () => {};
   }, [pondID]);
 
   return (
     <div className="noteBox">
-      {isLoaded ? <RenderNoteList list={noteData} /> : <div></div>}
+      {isLoaded ? (
+        <RenderNoteList list={noteData} />
+      ) : (
+        <div className="headTextDashboard-white" style={{ fontSize: "20px" }}>
+          Select Pond
+        </div>
+      )}
     </div>
   );
 }

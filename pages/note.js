@@ -95,7 +95,7 @@ export default function Note() {
   const RenderPondDropDown = (props) => {
     const farmData = props.list;
     const listItems = farmData.map((data) => (
-      <DropDownPondContent key={data.fish_pond_id} pond={data} />
+      <DropDownPondContent key={data.fishpond_id} pond={data} />
     ));
 
     return <div className="dropdownContent">{listItems}</div>;
@@ -106,21 +106,21 @@ export default function Note() {
       <div
         className="dropdownList"
         onClick={() => {
-          setselectPondText(pond.fish_pond_name);
-          setselectPondValue(pond.fish_pond_id);
+          setselectPondText(pond.fishpond_name);
+          setselectPondValue(pond.fishpond_id);
           dispatch({
             type: SELECT_PONDID,
-            selectPond: pond.fish_pond_id,
+            selectPond: pond.fishpond_id,
           });
         }}
       >
-        {pond.fish_pond_name}
+        {pond.fishpond_name}
       </div>
     );
   };
 
   const fetchPondList = async () => {
-    let url = `http://localhost:8080/api/v1/customer/dashboard-select`;
+    let url = `http://localhost:8080/api/v1/fishpond/lists`;
     let Authorization = token;
     // console.log(selectFarmValue);
     try {
@@ -134,7 +134,8 @@ export default function Note() {
           farm_id: selectFarmValue,
         },
       });
-      setDataPond(result.data.pond_list);
+      // console.log(result.data.farmlist);
+      setDataPond(result.data.farmlist);
     } catch (err) {
       console.log(err.message);
     }
@@ -223,7 +224,6 @@ export default function Note() {
             <div className="noteBoxContainer">
               {isfilter ? (
                 <div>
-                  filtered
                   {isLoaded ? (
                     <NoteBox2 />
                   ) : (
@@ -240,7 +240,6 @@ export default function Note() {
                 </div>
               ) : (
                 <div>
-                  not filter
                   {isLoaded ? (
                     <NoteBox />
                   ) : (
@@ -253,7 +252,7 @@ export default function Note() {
                         loading={true}
                       />
                     </div>
-                  )}{" "}
+                  )}
                 </div>
               )}
             </div>
