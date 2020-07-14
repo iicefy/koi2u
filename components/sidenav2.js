@@ -144,6 +144,30 @@ export default function SideNav2() {
       }
     };
 
+    const fetchSaveManual = async () => {
+      let url = `http://localhost:8080/api/v1/manual/create`;
+      let Authorization = token;
+      // console.log(selectFarmValue);
+      try {
+        const result = await axios({
+          method: "post",
+          url,
+          headers: {
+            Authorization,
+          },
+          data: {
+            value: factorText,
+            fishpond_id: selectPondValue,
+            factor_id: list.factor_id,
+          },
+        });
+        console.log(result.data);
+        // setDataPond(result.data.farmlist);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
     useDidMountEffect(() => {
       fetchPondList().then(() => {
         setIsPondLoaded(true);
@@ -190,9 +214,7 @@ export default function SideNav2() {
           <button
             className="btnLogin"
             onClick={() => {
-              console.log(selectPondValue);
-              console.log(factorText);
-              console.log(list.factor_id);
+              fetchSaveManual();
               toggle();
             }}
           >

@@ -29,6 +29,7 @@
   height: 90px;
   border-radius: 8px;
   background-color: #0172fc;
+  cursor: pointer;
 }
 .factorName {
   display: flex;
