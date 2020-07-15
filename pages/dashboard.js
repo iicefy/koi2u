@@ -67,6 +67,7 @@ export default function Dashboard() {
         type: ISPONDLOADED_INDASHBOARD,
         isPondLoaded: true,
       });
+      // console.log(result.data);
     } catch (err) {
       console.log(err.message);
     }

@@ -12,22 +12,32 @@ export default function PondBox({
 
   const FactorCard = ({ factorData }) => {
     return (
-      <div
-        className="iotFactorBox"
-        onClick={() => {
-          factorID(factorData.list_factor_id);
-          factorName(factorData.factor_facterType);
-          setFactorModal(true);
-        }}
-      >
-        <div className="factorName">{factorData.factor_facterType}</div>
-        <div className="factorValue">
-          <div className="factorMax">max {factorData.equipment_factor_max}</div>
-          <div className="factorAvg">
-            {factorData.equipment_factor_average}
-            <div className="factorUnit">{factorData.factor_unit}</div>
+      <div>
+        <div
+          className="iotFactorBox"
+          onClick={() => {
+            factorID(factorData.list_factor_id);
+            factorName(factorData.factor_facterType);
+            setFactorModal(true);
+          }}
+        >
+          <div className="factorName">{factorData.factor_facterType}</div>
+
+          <div className="factorValue">
+            <div className="factorMax">
+              max {factorData.equipment_factor_max}
+            </div>
+            <div className="factorAvg">
+              {factorData.equipment_factor_average}
+              <div className="factorUnit">{factorData.factor_unit}</div>
+            </div>
+            <div className="factorMin">
+              min {factorData.equipment_factor_min}
+            </div>
           </div>
-          <div className="factorMin">min {factorData.equipment_factor_min}</div>
+        </div>
+        <div className="factorStatus">
+          Factor Status : {factorData.equipment_factor_status}
         </div>
       </div>
     );

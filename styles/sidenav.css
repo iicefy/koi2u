@@ -191,6 +191,7 @@
   cursor: pointer;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  white-space: nowrap;
 }
 
 .dropdownList:hover {

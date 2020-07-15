@@ -57,8 +57,6 @@ export default function NoteBox() {
   };
 
   const NoteList = ({ data }) => {
-    // console.log(data);
-
     const createDate = new Date(data.manual_factor_created_date).toLocaleString(
       undefined,
       {
@@ -74,7 +72,7 @@ export default function NoteBox() {
       <div className="noteList">
         <div className="noteTextContainer1">
           <div className="noteText1">{data.factor_facterType}</div>
-          <div className="noteText1">6.2 </div>
+          <div className="noteText1">{data.manual_factor_value}</div>
         </div>
         <div className="noteTextContainer2">
           <div className="">{createDate}</div>
